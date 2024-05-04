@@ -1,4 +1,9 @@
 public class Tuple<A, B> {
+    /*
+     * 
+     * INITIALIZATION
+     * 
+     */
     private A first;
     private B second;
 
@@ -7,6 +12,11 @@ public class Tuple<A, B> {
         this.second = second;
     }
 
+    /*
+     * 
+     * GETTERS AND SETTERS
+     * 
+     */
     public A getFirst() {
         return first;
     }
@@ -23,6 +33,11 @@ public class Tuple<A, B> {
         this.second = newSecond;
     }
 
+    /*
+     * 
+     * OVERRIDES
+     * 
+     */
     @Override
     public String toString() {
         return "(" + first + ", " + second + ")";

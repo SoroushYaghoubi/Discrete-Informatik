@@ -3,23 +3,28 @@ import java.util.HashSet;
 import java.util.logging.Logger;;
 
 public class DFA {
+    /*
+     * 
+     * INITIALIZATION
+     * 
+     */
     private static final Logger logger = Logger.getLogger(DFA.class.getName());
 
     private Set<String> Q; // Menge aller Zustände
     private Set<Character> Σ; // das Alphabet
-    private Set<Tuple<Tuple<String, Character>, String>> σ; // Transitionsfunktion: σ: Q x Σ -> Q
+    private TransitionFunction<String, Character, String> σ;
     private String s; // Startzustand
     private Set<String> F; // Menge akzeptierender Zustände
 
     public DFA() {
         this.Q = new HashSet<String>();
         this.Σ = new HashSet<Character>();
-        this.σ = new HashSet<Tuple<Tuple<String, Character>, String>>();
+        this.σ = new TransitionFunction<>();
         this.s = "";
         this.F = new HashSet<String>();
     }
 
-    public DFA(Set<String> Q, Set<Character> Σ, Set<Tuple<Tuple<String, Character>, String>> σ, String s,
+    public DFA(Set<String> Q, Set<Character> Σ, TransitionFunction<String, Character, String> σ, String s,
             Set<String> F) {
         this.set_Q(Q);
         this.set_Σ(Σ);
@@ -28,6 +33,13 @@ public class DFA {
         this.set_F(F);
     }
 
+    /*
+     * 
+     * GETTERS
+     * &
+     * SETTERS
+     * 
+     */
     public Set<String> get_Q() {
         return Q;
     }
@@ -36,7 +48,7 @@ public class DFA {
         return Σ;
     }
 
-    public Set<Tuple<Tuple<String, Character>, String>> get_σ() {
+    public TransitionFunction<String, Character, String> get_σ() {
         return σ;
     }
 
@@ -56,11 +68,11 @@ public class DFA {
         this.Σ = Σ;
     }
 
-    public void set_σ(Set<Tuple<Tuple<String, Character>, String>> σ) {
-        for (Tuple<Tuple<String, Character>, String> transition : σ) {
-            String inputeState = transition.getFirst().getFirst();
-            char inputLetter = transition.getFirst().getSecond();
-            String outputState = transition.getSecond();
+    public void set_σ(TransitionFunction<String, Character, String> σ) {
+        for (Transition<String, Character, String> transition : σ) {
+            String inputeState = transition.getInputState();
+            char inputLetter = transition.getInputLetter();
+            String outputState = transition.getOutputState();
 
             if (!this.Q.contains(inputeState)) {
                 logger.warning(inputeState + " does not exist in Q. σ remains unchanged.");
@@ -119,16 +131,12 @@ public class DFA {
         }
     }
 
-    public void add_transition(Tuple<Tuple<String, Character>, String> t) {
-        if (!this.σ.add(t)) {
-            logger.warning(t + " already exists in σ.");
-        }
+    public void add_transition(Transition<String, Character, String> t) {
+        this.σ.add_transition(t);
     }
 
-    public void remove_transition(Tuple<Tuple<String, Character>, String> t) {
-        if (!this.σ.remove(t)) {
-            logger.warning(t + " never existed in σ.");
-        }
+    public void remove_transition(Transition<String, Character, String> t) {
+        this.σ.remove_transition(t);
     }
 
     public void change_startState(String state) {
@@ -147,6 +155,11 @@ public class DFA {
         }
     }
 
+    /*
+     * 
+     * OVERRIDES
+     * 
+     */
     @Override
     public String toString() {
         String Q = "Q: " + this.Q.toString() + "\n";
@@ -157,9 +170,14 @@ public class DFA {
         return "DFA: \n" + Q + Σ + σ + s + F + "\n";
     }
 
-    public void run_DFA_on_String(String stream){
-        for (char c : stream.toCharArray()){
-            
+    /*
+     * 
+     * MAIN FUNCTIONALITY
+     * 
+     */
+    public void run_DFA_on_String(String stream) {
+        for (char c : stream.toCharArray()) {
+
         }
     }
 }
