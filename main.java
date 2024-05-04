@@ -32,11 +32,13 @@ public static void main(String[] args) {
     Transition<String, Character, String> σ3 = new Transition<>("s1", 'c', "F");
     Transition<String, Character, String> σ4 = new Transition<>("s2", 'c', "F");
 
+    
+    
     σ.add_transition(σ1);
     σ.add_transition(σ2);
     σ.add_transition(σ3);
     σ.add_transition(σ4);
-
+    
     s = "s0";
 
     F.add("F");
@@ -47,6 +49,14 @@ public static void main(String[] args) {
      * 
      */
     DFA A = new DFA(Q, Σ, σ, s, F);
-
     System.out.println(A.toString());
+
+    System.out.println("-------------------------->");
+    System.out.println(A.run_DFA_on_String("ac"));
+    System.out.println("-------------------------->");
+    System.out.println(A.run_DFA_on_String("bc"));
+    System.out.println("-------------------------->");
+    System.out.println(A.run_DFA_on_String("abc"));
+    System.out.println("<--------------------------");
+
 }

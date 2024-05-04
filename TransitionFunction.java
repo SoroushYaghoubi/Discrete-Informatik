@@ -65,4 +65,19 @@ public class TransitionFunction<A, B, C> implements Iterable<Transition<A, B, C>
     public Iterator<Transition<A, B, C>> iterator() {
         return Transitions.iterator();
     }
+
+    /*
+     * 
+     * MAIN FUNCTIONALITY
+     * 
+     */
+    public C transitionFrom(Tuple<A, B> input){
+        for (Transition<A, B, C> t : this.Transitions){
+            if (input.equals(t.getInput())){
+                return t.getOutputState();
+            }
+        }
+
+        return null;
+    }
 }

@@ -184,9 +184,28 @@ public class DFA {
         return true;
     }
 
-    public void run_DFA_on_String(String stream) {
-        for (char c : stream.toCharArray()) {
+    public boolean run_DFA_on_String(String stream) {
+        if (stream.isEmpty()){
+            return false;
+        }
 
+        String state = s;
+        System.out.println(state);
+        for (char c : stream.toCharArray()) {
+            String newState = σ.transitionFrom(new Tuple<String, Character>(state, c));
+            if (newState!=null){
+                state = newState;
+            } else {
+                logger.warning("Your DFA is incomplete. There is no Transition defined for: (" + state + ", " + c + ")");
+                return false;
+            }
+            System.out.println(state);
+        }
+
+        if (F.contains(state)){
+            return true;
+        } else {
+            return false;
         }
     }
 }
