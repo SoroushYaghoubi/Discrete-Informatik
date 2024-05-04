@@ -28,7 +28,7 @@ public class TransitionFunction<A, B, C> implements Iterable<Transition<A, B, C>
      */
     public boolean add_transition(Transition<A, B, C> t) {
         for (Transition<A, B, C> transition : this.Transitions) {
-            if (!transition.equals(t)) {
+            if (transition.ensureFunctionIntegrity(t)) {
                 logger.warning("You wanted to add " + transition
                         + " but Transition Functions cannot accept two different outputs for the same inputs.");
                 return false;
@@ -53,10 +53,11 @@ public class TransitionFunction<A, B, C> implements Iterable<Transition<A, B, C>
      */
     @Override
     public String toString() {
-        String output = "Transition Funtcion: \n";
+        String output = "Transition Funtcion: { ";
         for (Transition<A, B, C> transition : Transitions) {
-            output += transition.toString();
+            output += transition.toString() + " ";
         }
+        output +="}";
         return output;
     }
 

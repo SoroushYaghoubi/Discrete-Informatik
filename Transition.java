@@ -40,12 +40,8 @@ public class Transition<A, B, C> {
      */
     @Override
     public String toString() {
-        String str = "Transition: \n";
-        String inputState = "input state: " + this.getInputState().toString() + "\n";
-        String inputLetter = "input letter: " + this.getInputLetter().toString() + "\n";
-        String outputState = "output state: " + this.getOutputState().toString() + "\n";
-
-        return str + inputState + inputLetter + outputState;
+        return "(" + this.getInputState().toString() + ", " + this.getInputLetter().toString() + ") --> "
+                + this.getOutputState().toString() + " ";
     }
 
     @Override
@@ -60,5 +56,18 @@ public class Transition<A, B, C> {
         Transition<?, ?, ?> other = (Transition<?, ?, ?>) obj;
 
         return (this.getInput().equals(other.getInput())) && (this.getOutputState().equals(other.getOutputState()));
+    }
+
+    public boolean ensureFunctionIntegrity(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Transition<?, ?, ?> other = (Transition<?, ?, ?>) obj;
+
+        return this.getInput().equals(other.getInput());
     }
 }
