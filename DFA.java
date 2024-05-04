@@ -60,15 +60,20 @@ public class DFA {
         return F;
     }
 
-    public void set_Q(Set<String> Q) {
+    /*
+     * 
+     * HELPER PRIVATE FUNCTIONS
+     * 
+     */
+    private void set_Q(Set<String> Q) {
         this.Q = Q;
     }
 
-    public void set_Σ(Set<Character> Σ) {
+    private void set_Σ(Set<Character> Σ) {
         this.Σ = Σ;
     }
 
-    public void set_σ(TransitionFunction<String, Character, String> σ) {
+    private void set_σ(TransitionFunction<String, Character, String> σ) {
         for (Transition<String, Character, String> transition : σ) {
             String inputeState = transition.getInputState();
             char inputLetter = transition.getInputLetter();
@@ -91,7 +96,7 @@ public class DFA {
         this.σ = σ;
     }
 
-    public void set_s(String s) {
+    private void set_s(String s) {
         if (!this.Q.contains(s)) {
             logger.warning(s + " does not exist in Q.");
         } else {
@@ -99,7 +104,7 @@ public class DFA {
         }
     }
 
-    public void set_F(Set<String> F) {
+    private void set_F(Set<String> F) {
         if (!Q.containsAll(F)) {
             logger.warning(F + " must be a subset of Q.");
         } else {
@@ -107,49 +112,49 @@ public class DFA {
         }
     }
 
-    public void add_state(String state) {
+    private void add_state(String state) {
         if (!this.Q.add(state)) {
             logger.warning(state + " already exists in Q.");
         }
     }
 
-    public void remove_state(String state) {
+    private void remove_state(String state) {
         if (!this.Q.remove(state)) {
             logger.warning(state + " never existed in Q.");
         }
     }
 
-    public void add_letter(char c) {
+    private void add_letter(char c) {
         if (!this.Σ.add(c)) {
             logger.warning(c + " already exists in Σ.");
         }
     }
 
-    public void remove_letter(char c) {
+    private void remove_letter(char c) {
         if (!this.Σ.remove(c)) {
             logger.warning(c + " never existed in Σ.");
         }
     }
 
-    public void add_transition(Transition<String, Character, String> t) {
+    private void add_transition(Transition<String, Character, String> t) {
         this.σ.add_transition(t);
     }
 
-    public void remove_transition(Transition<String, Character, String> t) {
+    private void remove_transition(Transition<String, Character, String> t) {
         this.σ.remove_transition(t);
     }
 
-    public void change_startState(String state) {
+    private void change_startState(String state) {
         this.s = state;
     }
 
-    public void add_acceptedState(String state) {
+    private void add_acceptedState(String state) {
         if (!this.F.add(state)) {
             logger.warning(state + " already exists in F.");
         }
     }
 
-    public void remove_acceptedState(String state) {
+    private void remove_acceptedState(String state) {
         if (!this.F.remove(state)) {
             logger.warning(state + " never existed in F.");
         }
@@ -175,6 +180,10 @@ public class DFA {
      * MAIN FUNCTIONALITY
      * 
      */
+    public boolean ensureDFAIntegrity() {
+        return true;
+    }
+
     public void run_DFA_on_String(String stream) {
         for (char c : stream.toCharArray()) {
 
