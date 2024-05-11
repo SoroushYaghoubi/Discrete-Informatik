@@ -1,4 +1,5 @@
 import java.util.Set;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public static void main(String[] args) {
@@ -45,7 +46,19 @@ public static void main(String[] args) {
     
 
     // ---------------------------------------------
+    ArrayList<String> nts = new ArrayList<>();
+    nts.add("S");
+    nts.add("a");
+    nts.add("S");
     
+    Set<String> V = new HashSet<>();
+    String S = "S";
+    Production<String, String> p0 = new Production<>(S, nts);
+    
+    
+    V.add(S);
+    V.add("");
 
-    
+
+    System.out.println(p0);
 }
