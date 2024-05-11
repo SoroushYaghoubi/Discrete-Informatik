@@ -71,7 +71,7 @@ public class ParseTree<A> {
      */
     @Override
     public String toString() {
-        return "Token:" + this.token + "";
+        return "Token:" + this.token + ((this.hasParent()) ? "(Adopted)":"(Orphan)");
     }
 
     /*
