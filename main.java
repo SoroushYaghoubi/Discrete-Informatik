@@ -49,14 +49,10 @@ public static void main(String[] args) {
      * 
      */
     DFA A = new DFA(Q, Σ, σ, s, F);
-    System.out.println(A.toString());
+    
 
-    System.out.println("-------------------------->");
-    System.out.println(A.run_DFA_on_String("ac"));
-    System.out.println("-------------------------->");
-    System.out.println(A.run_DFA_on_String("bc"));
-    System.out.println("-------------------------->");
-    System.out.println(A.run_DFA_on_String("abc"));
-    System.out.println("<--------------------------");
+    // ---------------------------------------------
+    
 
+    
 }
