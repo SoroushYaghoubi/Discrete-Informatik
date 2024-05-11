@@ -38,6 +38,21 @@ public class TransitionFunction<A, B, C> implements Iterable<Transition<A, B, C>
         return true;
     }
 
+    public boolean add_transition(A a, B b, C c) {
+        Transition<A, B, C> t = new Transition<A, B, C>(a, b, c);
+
+        for (Transition<A, B, C> transition : this.Transitions) {
+            if (transition.ensureFunctionIntegrity(t)) {
+                logger.warning("You wanted to add " + transition
+                        + " but Transition Functions cannot accept two different outputs for the same inputs.");
+                return false;
+            }
+        }
+
+        Transitions.add(t);
+        return true;
+    }
+
     public boolean remove_transition(Transition<A, B, C> t) {
         if (!this.Transitions.remove(t)) {
             logger.warning(t + " never existed in σ.");
@@ -57,7 +72,7 @@ public class TransitionFunction<A, B, C> implements Iterable<Transition<A, B, C>
         for (Transition<A, B, C> transition : Transitions) {
             output += transition.toString() + " ";
         }
-        output +="}";
+        output += "}";
         return output;
     }
 
@@ -71,9 +86,9 @@ public class TransitionFunction<A, B, C> implements Iterable<Transition<A, B, C>
      * MAIN FUNCTIONALITY
      * 
      */
-    public C transitionFrom(Tuple<A, B> input){
-        for (Transition<A, B, C> t : this.Transitions){
-            if (input.equals(t.getInput())){
+    public C transitionFrom(Tuple<A, B> input) {
+        for (Transition<A, B, C> t : this.Transitions) {
+            if (input.equals(t.getInput())) {
                 return t.getOutputState();
             }
         }

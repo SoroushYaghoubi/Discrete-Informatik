@@ -26,18 +26,11 @@ public static void main(String[] args) {
     Σ.add('a');
     Σ.add('b');
     Σ.add('c');
-
-    Transition<String, Character, String> σ1 = new Transition<>("s0", 'a', "s1");
-    Transition<String, Character, String> σ2 = new Transition<>("s0", 'b', "s2");
-    Transition<String, Character, String> σ3 = new Transition<>("s1", 'c', "F");
-    Transition<String, Character, String> σ4 = new Transition<>("s2", 'c', "F");
-
     
-    
-    σ.add_transition(σ1);
-    σ.add_transition(σ2);
-    σ.add_transition(σ3);
-    σ.add_transition(σ4);
+    σ.add_transition("s0", 'a', "s1");
+    σ.add_transition("s0", 'b', "s2");
+    σ.add_transition("s1", 'c', "F");
+    σ.add_transition("s2", 'c', "F");
     
     s = "s0";
 
